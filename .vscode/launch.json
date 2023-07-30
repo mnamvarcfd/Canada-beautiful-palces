@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",                   // Specifies the type of the debugger (Node.js)
+        "request": "launch",              // Indicates that we want to launch the debugger
+        "name": "Debuging",               // The name of this debug configuration (can be customized)
+        "runtimeArgs": [
+          "-r",
+          "ts-node/register"              // Registers ts-node to transpile TypeScript on the fly during debugging
+        ],
+        "args": [
+          "${relativeFile}"               // Passes the currently opened file as an argument to ts-node
+        ],
+        "env": {
+          "AWS_REGION": "ca-central-1"    // Sets the environment variable AWS_REGION to "ca-central-1"
+        }
+      }
+    ]
+  }
+  
