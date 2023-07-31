@@ -1,2 +1,13 @@
 
-GET https://cf97on0u1c.execute-api.ca-central-1.amazonaws.com/prod/hello
+@endpoint = https://h6g0sqea41.execute-api.ca-central-1.amazonaws.com/prod/
+
+
+POST {{endpoint}}/spaces/
+Content-Type: application/json
+{
+    "location": "Montreal",
+    "name": "mMonut royal park"
+}
+###
+
+GET {{endpoint}}/spaces?location=Toronto
