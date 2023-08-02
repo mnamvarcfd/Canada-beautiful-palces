@@ -3,8 +3,11 @@ import { LambdaIntegration } from "aws-cdk-lib/aws-apigateway";
 import { AttributeType, BillingMode, Table } from "aws-cdk-lib/aws-dynamodb";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 
+type ReservedLambdaNames = "Create" | "Read" | "Update" | "Delete";
+
 export interface TableProps {
     CRUDLambdaPath: string;
+    CRUDLambdaName: ReservedLambdaNames[];
 
     tableName: string;
     primaryKey: string;
@@ -39,14 +42,29 @@ export class GenerateTable{
         this.createTable();
         this.addSecondaryKeys();
 
-        this.createLam = this.createLambdaFunction('Create', props.CRUDLambdaPath);
-        this.table.grantWriteData(this.createLam);
-        this.createLamIntegration = new LambdaIntegration(this.createLam);
+        if(this.props.CRUDLambdaName.includes('Create')){
+            this.createLam = this.createLambdaFunction('Create', props.CRUDLambdaPath);
+            this.table.grantWriteData(this.createLam);
+            this.createLamIntegration = new LambdaIntegration(this.createLam);
+        }
 
-        this.readLam = this.createLambdaFunction('Read', props.CRUDLambdaPath);
-        this.table.grantReadData(this.readLam);
-        this.readLamIntegration = new LambdaIntegration(this.readLam); 
+        if(this.props.CRUDLambdaName.includes('Read')){
+            this.readLam = this.createLambdaFunction('Read', props.CRUDLambdaPath);
+            this.table.grantReadData(this.readLam);
+            this.readLamIntegration = new LambdaIntegration(this.readLam); 
+        }
 
+        if(this.props.CRUDLambdaName.includes('Update')){
+            this.updateLam = this.createLambdaFunction('Update', props.CRUDLambdaPath);
+            this.table.grantFullAccess(this.updateLam);
+            this.updateLamIntegration = new LambdaIntegration(this.updateLam);
+        }
+
+        if(this.props.CRUDLambdaName.includes('Delete')){
+            this.deleteLam = this.createLambdaFunction('Delete', props.CRUDLambdaPath);
+            this.table.grantWriteData(this.deleteLam);
+            this.deleteLamIntegration = new LambdaIntegration(this.deleteLam); 
+        }
 
 
     }
@@ -77,7 +95,7 @@ export class GenerateTable{
             })
         }
     }
-    
+
     //a generic function to create a lambda function
     private createLambdaFunction(lamName: string, lamPath: string): NodejsFunction{
         const lambdaFunction = new NodejsFunction(this.stack, lamName, {

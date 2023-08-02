@@ -1,13 +1,16 @@
 
-@endpoint = https://h6g0sqea41.execute-api.ca-central-1.amazonaws.com/prod/
+@endpoint = https://h6g0sqea41.execute-api.ca-central-1.amazonaws.com/prod
 
+@token = eyJraWQiOiJ1OFF2a1NRNzd3NlVBQ1h5SzQ3eXJaamlGOHpJdVgrQ2FlQjM0anJcLzVFMD0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIzODQzYTg5ZC03OWUyLTQzYTktOTI3NS05YmIyMmJhZGY5YTciLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuY2EtY2VudHJhbC0xLmFtYXpvbmF3cy5jb21cL2NhLWNlbnRyYWwtMV82Q2J6TVZpcnUiLCJjb2duaXRvOnVzZXJuYW1lIjoibW5hbSIsIm9yaWdpbl9qdGkiOiI0NjMxYjJiYS0wNmE3LTQyZTAtYTFiYi1iMTU5YTRhYjI3YzQiLCJhdWQiOiI0MmJzZzh0Ymk4bzI0Z3N1dnByNGNoM2YxMCIsImV2ZW50X2lkIjoiZjM4MWVmMjctNDcxZS00ZDQzLWIwNDYtMzc2ZWU1NmNhZTNkIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2OTA5MTg1MTAsImV4cCI6MTY5MDkyMjExMCwiaWF0IjoxNjkwOTE4NTEwLCJqdGkiOiJlNDM5YWU5ZS02MDYwLTQ4NGYtYTk4Yy1jYTU0MzM5NDcyNTQiLCJlbWFpbCI6Im1uYW12YXJjZmRAZ21haWwuY29tIn0.Kwzw1CtMkV7OtklMXv8YcbFhXoijwf1Y5M_4xXksYOeWU7iBn6DxkyZOhXo0G__h3qro1xGK4C0vmDzmVYuVJTWpuI41ruQAJ6YZfJ6czpKE3BM11Bj7dwBuzrBqsV6D33Qi2_5F5Kt5WzwbAU5J6ApoMxXFfUx2QYgIx7kiT2Vgpr5LPWZ_pd3Puo0GUhc5ytqcXbc6E3ojyu7ouZd4OdNQx-KTnQ4O6sAxdTQkko3n4TexdH2m7fCOwlYhqvb79I5NHy2ctfvJ7xYy4712F0iinigDG_19wiCbRL9urI7cao4vmhnLDRMynmcpHRI8FHU_6K4AFroAAVwhnYuHYg
+###
 
 POST {{endpoint}}/spaces/
 Content-Type: application/json
 {
-    "location": "Montreal",
-    "name": "mMonut royal park"
+    "location": "Montreal2",
 }
 ###
 
-GET {{endpoint}}/spaces?location=Toronto
+GET {{endpoint}}/spaces?spotId=8f79c621-abc3-41b8-b83f-8c437897cac2
+Authorization: {{token}}
+###

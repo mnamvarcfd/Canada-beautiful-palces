@@ -9,9 +9,11 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^5.6.0",
     "@aws-sdk/client-dynamodb": "^3.379.1",
     "@aws-sdk/lib-dynamodb": "^3.379.1",
     "@types/aws-lambda": "^8.10.119",
+    "aws-amplify": "^5.3.6",
     "aws-sdk": "^2.1425.0"
   }
 }
