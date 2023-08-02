@@ -24,6 +24,7 @@ export class Authorizing {
         this.createUserPoolClient();
         this.createAuthorizer();
         this.createIdentityPool();
+        
         this.createAdminGroup();
     }
 
@@ -81,9 +82,9 @@ export class Authorizing {
         new CfnUserPoolGroup(this.scope, 'AdminGroup', {
             userPoolId: this.userPool.userPoolId,
             groupName: 'AdminGroup',
+            roleArn: this.identifier.adminRole.roleArn
         });
 
-        roleArn: this.identifier.adminRole.roleArn;
     }
 
     private createIdentityPool(){

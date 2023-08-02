@@ -3,6 +3,16 @@ import { AuthService } from "./AuthService";
 import AWS = require("aws-sdk");
 
 
+async function getBuckets() {
+    let buckets;
+    try {
+        buckets = await new AWS.S3().listBuckets().promise();
+    } catch (error) {
+        buckets = undefined
+    }
+
+    return buckets;
+}
 
 async function main(){
 
@@ -13,6 +23,8 @@ async function main(){
     await authService.getAWSTempCred(user);
 
     const cred = AWS.config.credentials;
+
+    const buckets = await getBuckets();
 
     console.log(cred);
 }
