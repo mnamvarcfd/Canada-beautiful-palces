@@ -9,6 +9,7 @@ export class Authorizing {
    
     private scope: Construct;
     private api: RestApi;
+    private bucketArn: string;
 
     private userPool: UserPool;
     private userPoolClient: UserPoolClient;
@@ -16,9 +17,10 @@ export class Authorizing {
     private identifier: Identifier;
     
 
-    constructor (scope: Construct, api: RestApi){
+    constructor (scope: Construct, api: RestApi, bucketArn: string){
         this.scope = scope;
         this.api = api;
+        this.bucketArn = bucketArn;
 
         this.createUserPool();
         this.createUserPoolClient();
@@ -88,6 +90,6 @@ export class Authorizing {
     }
 
     private createIdentityPool(){
-        this.identifier = new Identifier(this.scope, this.userPool, this.userPoolClient);
+        this.identifier = new Identifier(this.scope, this.userPool, this.userPoolClient, this.bucketArn);
     }
 }

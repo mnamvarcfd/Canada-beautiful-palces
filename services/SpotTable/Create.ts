@@ -15,7 +15,12 @@ async function handler(event: APIGatewayProxyEvent, context: Context ): Promise<
     const result: APIGatewayProxyResult = {
         statusCode: 200,
         body: ' ',
-        headers: {'Access-Control-Allow-Origin': '*'}
+        headers: {
+            'content-type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-methods': '*',
+            'Access-Control-Allow-Headers': '*'
+        }
     }
 
     try {
@@ -36,7 +41,7 @@ async function handler(event: APIGatewayProxyEvent, context: Context ): Promise<
         await docClient.send(command);
         
         result.statusCode = 200;
-        result.body = JSON.stringify({message: `ceated item id ${item.spotId} was success`});
+        result.body = JSON.stringify({id: item.spotId});
  
         return result;
 

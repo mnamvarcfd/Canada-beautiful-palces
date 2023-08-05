@@ -11,6 +11,9 @@ export class Identifier{
     private scope: Construct;
     private userPool: UserPool;
     private userPoolClient: UserPoolClient;
+    private photoBucketArn: string;
+
+    
 
     private identityPool: CfnIdentityPool;
 
@@ -19,10 +22,11 @@ export class Identifier{
     public adminRole: Role;
 
 
-    constructor(scope: Construct, userPool: UserPool, userPoolClient: UserPoolClient){
+    constructor(scope: Construct, userPool: UserPool, userPoolClient: UserPoolClient, photoBucketArn: string){
         this.scope = scope;
         this.userPool = userPool;
         this.userPoolClient = userPoolClient;
+        this.photoBucketArn = photoBucketArn;
 
         this.createIdentityPool();
         this.createRoles();
@@ -85,8 +89,8 @@ export class Identifier{
 
         this.adminRole.addToPolicy( new PolicyStatement({
             effect: Effect.ALLOW,
-            actions: ['s3:ListAllMyBuckets'],
-            resources: ['*']
+            actions: ['s3:PutObject', 's3:PutObjectAcl'],
+            resources: [this.photoBucketArn]
         }))
     }
     
